@@ -1,40 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { EntryListing } from '../models/entry-listing';
-import { EntryPage } from '../models/entry-page';
-import { EntryCategory } from '../models/entry-category';
+import { RoverImage } from '../models/rover-image';
+import { RoverBatch } from '../models/rover-batch';
 
-const postAPI = environment.apiURL + 'posts';
-const categoryAPI = environment.apiURL + 'categories';
+const baseAPI = environment.apiUrl;
+const baseKey = environment.apiKey;
+
+// example https://api.nasa.gov/mars-photos/api/v1/rovers/spirit/photos?sol=1000&api_key=
 
 @Injectable()
 export class RoverImagesService {
 
   constructor(private http: HttpClient) { }
 
-  // if no sol specified, get default stream
+  // if no sol specified, get latest from latest_photos
   // batch of ten(?), but with latest sol as default to show
+  // must have rover name as well
 
-  getImages() {
-      // get image stream based on rover id
-  }
-
-  getEntries() {
-    return this.http.get<EntryListing>(postAPI);
-  }
-  getEntryById(id: number) {
-    return this.http.get<EntryPage>(postAPI + '/' + id);
+  getImages(rover: string) {
+      // get image stream based on rover name
+      return this.http.get<RoverBatch>(baseAPI + rover + '/latest_photos?api_key=' + baseKey);
   }
 
-  getCategories() {
-    return this.http.get(categoryAPI);
-  }
-  getCategoryById(id: number) {
-    return this.http.get<EntryCategory>(categoryAPI + '/' + id);
+  getImagesBySol(rover: string, sol: number) {
+    return this.http.get<RoverImage>(baseAPI + rover + 'photos?sol=' + sol + '&api_key=' + baseKey);
   }
 
-  getEntryBySlug(slug: string) {
-    return this.http.get<EntryPage>(postAPI + '?slug=' + slug);
+  getImagesByEarthDate(rover: string, edate: string) {
+    return this.http.get<RoverImage>(baseAPI + rover + 'photos?edate=' + edate + '&api_key=' + baseKey);
   }
 }

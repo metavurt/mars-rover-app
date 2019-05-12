@@ -1,0 +1,25 @@
+<main>
+
+  <section class="logbook">
+    <div class="loading-layout" *ngIf="!imagedata">
+      <img class="loading-logo" src="../../assets/images/blocks.svg" />
+    </div>
+
+    <!-- calendar drop down -->
+
+    <div>
+      <h2>select image by</h2>
+    </div>
+
+    <div class="rover-image-grid">
+      <figure *ngFor="let image of imagedata">
+        <img src="{{image.img_src}}" />
+        <figcaption><strong>Sol: {{image.sol}}</strong><br/>
+        <span>{{image.camera.full_name}}</span></figcaption>
+      </figure>
+    </div>
+
+
+  </section>
+
+</main>

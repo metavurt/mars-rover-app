@@ -1,1 +1,477 @@
-/* You can add global styles to this file, and also import other style files */
+/*****************************************
+* mars rover app -- 5/12/2019
+* 
+* 1. Variables
+* 2. Global Elements
+* 3. Page items
+* 4. Section/Component specific
+* 5. Media Queries as needed
+* 6. Helpers
+*
+*****************************************/
+
+:root {
+
+    --header-height: calc(3vh * 1.618);
+  
+    --font-size-minimum: 1rem;
+    --font-size-maximum: 1.625rem;
+  
+    --screen-width-min: 16.25rem;
+    --screen-width-max: 100rem;
+  
+    --primary-white: hsla(0, 0%, 100%, 1);
+    --primary-black: hsla(0, 0%, 0%, 1);
+
+    --mars-orange: #e1805e;
+    --mars-tan: #dccba5;
+    --mars-brown: #906654;
+    --mars-gray: #a18f85;
+    --mars-black: #040404;
+    --mars-blue: #4b98b4;
+
+  
+    --weo3-text: hsla(0, 0%, 27%, 1);    
+  
+    --work-example-spacing: 3vw;
+  
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    overflow: auto;
+  }
+  
+  body {
+    margin: 0;
+    font-size: calc(1rem + (26 - 16) * ((100vw - 16.25rem) / (1600 - 260)));
+    line-height: calc(1.1em + 0.5vw);
+    color: var(--weo3-text);
+    font-weight: normal;
+    background: var(--weo3-white);
+    font-family: 'Assistant', Arial, Helvetica, sans-serif;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    /* ^ need this now, apparently because #reasons :( */
+  }
+  
+  
+  app-root {
+    display: grid;
+    grid-template-rows: minmax(var(--header-height), auto) 1fr;
+    height: inherit;
+    min-height: 100%;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    height: var(--header-height);
+    width: 100%;
+    top: 0;
+    background: var(--mars-orange);
+    color: var(--primary-white);
+    box-shadow: 0px 9px 14px -3px hsla(16, 69%, 63%, 0.5);
+    z-index: 1;
+  }
+  
+  header figure {
+    height: 100%;
+    padding: 0.5em;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    z-index: 100;
+    /* top: calc(100vh - 3em); */
+    /* bottom: var(--header-height); */
+    bottom: 0;
+    background: var(--primary-white);
+    width: 100vw;
+    height: 3em;
+    box-shadow: -1px -1px 2rem hsla(0, 0%, 0%, 0.25);
+  }
+  
+    nav button {
+      flex: 1 1 20vw;
+      border-radius: 0;
+      line-height: 0.8;
+      background: var(--primary-white);
+      border: none;
+      border-width: 0;
+      color: var(--mars-orange);
+      margin: 0;
+    }
+  nav button:visited {
+    color: var(--mars-orange);
+  }
+  nav .active {
+    background: var(--mars-orange);
+  }
+  
+  button mat-icon, button .caption {
+    color: var(--mars-orange);
+  }
+  nav .active mat-icon, nav .active .caption {
+    color: var(--mars-black);
+  }
+  button .caption {
+    display: block;
+    font-variant: small-caps;
+    font-weight: 400;
+  }
+  
+  main {
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: minmax(1rem, 1fr) auto minmax(1rem, 1fr);
+    background: var(--weo3-white);
+    padding-top: calc(var(--header-height) * .75);
+    padding-bottom: calc(var(--header-height) * 1.5);
+    min-height: 100%;
+  }
+  
+    main > * {
+        grid-column: 2;
+    }
+  
+  figure {
+  margin: 0;
+  }
+  
+  img {
+  max-width: 100%;
+  max-height: 100%;
+  }
+  
+  ul {
+  list-style-type: none;
+  padding-left: 0;
+  }
+  
+  p {
+  font-size: calc(1rem + (20 - 16) * ((100vw - 20rem) / (1600 - 320)));
+  line-height: calc(1.5em + 0.25vw);
+  margin: 0;
+  }
+  
+  p + p {
+  margin-top: calc(1.65em + 0.5vw);
+  }
+  
+  h1, h2, h3, h4, h5 {
+    text-transform: capitalize;
+  }
+  
+  h1 {
+  font-size: calc(2rem + (1.3125 - 1) * ((100vw - 20rem) / (80 - 20)));
+  margin: 0 0.5em;
+  }
+  
+  
+  /* should be h3 */
+  h5 {
+    font-size: calc(1.35rem + (1.3125 - 1) * ((100vw - 20rem)/ (80 - 20)));
+    color: var(--weo3-blue);
+    margin-bottom: 0;
+  }
+  
+  
+  /***************** View: Rover pages */
+  /*******************************/
+  .loading-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  
+  .loading-logo {
+    width: 50%;
+  }  
+  
+  .rover-image-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10rem,1fr));
+    grid-column-gap: 1rem;
+    grid-row-gap: 2rem;
+    width: 100%;
+  }
+  figcaption {
+    font-size: 1rem;
+    width: 100%;
+    text-align: left;
+    line-height: 1;
+  }
+  figcaption span {
+    font-size: 0.85em;
+  }
+  
+
+  .fade-in-manual {
+    animation-name: fadeInManual;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-delay: calc(var(--mydepth) * .10s);
+    opacity: 0;
+  }
+  
+  @keyframes fadeInManual {
+    from {
+      /*opacity: 0;*/
+      transform: translate3d(0, 20%, 0);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  
+  
+  .entry-listing {
+  text-decoration: none;
+  }
+  
+  .entry-container {
+    display: flex;
+    flex-direction: column;  
+    background: var(--weo3-light-blue);
+    border-radius: 0.25em;
+    overflow: hidden;
+    height: 100%;
+    color: var(--primary-white);
+    box-shadow: 0 10px 40px -14px hsla(0,0%,0%,.5);
+  }
+  
+  .entry-title, .entry-date {
+    color: var(--primary-white);
+    padding: 0.75em;
+    font-size: calc(1.2rem + (22 - 18) * ((100vw - 20rem) / (1600 - 320)));
+    line-height: calc(0.95em + 0.5vw);   
+  }
+  
+  .entry-title {
+    text-transform: capitalize;
+    font-weight: lighter;
+    margin: 0;
+  }
+  
+  .entry-date {
+    margin-top: auto;
+  }
+  
+  .entry-excerpt {
+    margin: 0;
+    padding: 1em;
+    background: var(--primary-white);
+    color: var(--weo3-black);  
+  }
+  
+  
+  
+  /*************** View: Logbook entry */
+  /*******************************/
+  
+  #log-entry {
+    max-width: 34em;
+  }
+  
+  pre {
+    overflow: auto;
+    background: var(--primary-white);
+    padding: 1em;
+    border: 1px solid var(--weo3-light-blue);
+    max-width: 90vw;
+    margin: 0 auto;
+    font-size: calc(0.85rem + (16 - 14) * ((100vw - 16.25rem) / (1600 - 260)));
+  }
+  
+  blockquote::before {
+    content: open-quote;
+  }
+  blockquote::after {
+    content: close-quote;
+  }
+  
+  #log-entry hr {
+    overflow: visible;
+    padding: 0;
+    border: none;
+    border-top: medium double var(--weo3-light-blue);
+    color: var(--weo3-light-blue);
+    text-align: center;
+    margin: 8em 0;
+  }
+  
+  #log-entry hr:after {
+    content: "§";
+    display: inline-block;
+    position: relative;
+    top: -0.45em;
+    font-size: 2.5em;
+    color: var(--weo3-light-blue);
+    background: var(--weo3-white);
+  }
+  
+  
+  
+  
+  
+  /* for the grid child switches */
+  @media screen and (min-width: 35em) {
+  
+  .self-portrait {
+    width: calc(10em + (20 - 10) * ((100vw - 16.25rem) / (1600 - 260)));
+    height: calc(10em + (20 - 10) * ((100vw - 16.25rem) / (1600 - 260)));
+    float: left;
+    margin: 0.4em 1em 0.4em 0;
+  }
+  
+  .social-links {
+    display: grid;
+    grid-gap: 0.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(16.250rem, 1fr));
+    max-width: 34rem;
+    margin: 0 auto;
+  }
+  
+  .social-links li:nth-child(even) a {
+    flex-direction: row-reverse;
+    border-radius: 0 2.2rem 2.2rem 0;
+  }  
+  
+  }
+  
+  @media screen and (min-width: 43.250em) {
+  
+    .work-examples, .entries-list {
+      grid-row-gap: var(--work-example-spacing);
+    }
+  
+    .work-example [itemprop=responsibilities] {
+      margin-top: auto;
+      min-height: 4em;
+    }
+  
+    .work-example [itemprop=technologies] {  
+      min-height: 4.5em; 
+    }
+  
+    #contact h3 {
+      text-shadow: -1px -1px 0 var(--weo3-white),
+        .025em .025em 0 var(--weo3-white),
+        .05em .05em 0 var(--weo3-light-blue);
+    }
+  
+  }
+  
+  
+  
+  /* in px, 900 */
+  @media screen and (min-width: 56.25em) {
+  /* main switch from bottom nav to top nav */
+  
+  header {
+    justify-content: flex-start;
+    padding: 0;
+  }
+  
+  h1 {
+    display: none;
+  }
+  
+  nav {
+    align-content: flex-start;
+    background: transparent;
+    box-shadow: unset;
+    color: var(--weo3-white);
+    margin: 0;
+    margin-left: calc(var(--header-height) + 0.5em);
+    width: auto;
+    height: var(--header-height);
+    top: 0;
+    position: absolute;
+    justify-content: flex-start;
+  }
+  
+  nav button {
+    flex: unset;
+    display: flex;
+    align-items: flex-end;
+    background: transparent;
+    border: none;
+    padding: 0 1em;
+  }
+  
+  nav button:hover {
+    cursor: pointer;
+  }
+  
+  nav button:focus {
+    outline: none;
+    background-color: transparent;
+  }
+  
+  nav .material-icons {
+    display: none;
+  }
+  
+  nav .active {
+    background: var(--primary-white);
+    padding-bottom: 1rem;
+    margin-bottom: -1rem;
+    box-shadow: 1px 4px 21px rgba(51, 102, 153, 0.4);
+    padding: 0 1.5em 1.5em 1.5em;
+  }
+  
+  nav .active .caption {
+    color: var(--weo3-highlight);
+  }
+  
+  nav .active:hover {
+    cursor: default;
+  }
+  
+  nav .caption {
+    color: var(--weo3-white);
+    font-variant: small-caps;
+    font-weight: 400;
+    font-size: calc(1.5rem + (22 - 20) * ((100vw - 16.25rem) / (1600 - 260)));
+  }
+  
+  .work-example [itemprop=responsibilities] {
+    min-height: 5rem; 
+  }  
+  
+  .work-example [itemprop=url] a {
+    padding: 0.5em;
+   }  
+  
+  .work-example [itemprop=url] a[href] {
+    border-top: 1px solid var(--weo3-light-gray);
+    color: var(--weo3-blue);
+    background-position: right bottom;
+  }  
+  }
+  
+  /* final font-size clamp at 1600px width */
+  @media screen and (min-width: 100em) {
+  body {
+      font-size: var(--font-size-maximum);
+  }
+  }
+  
+  
+  
+  .no-show {
+  display: none;
+  }
+  

@@ -7,32 +7,32 @@ import { MatIconRegistry, MatIconModule } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { AboutComponent } from './about/about.component';
-import { LogComponent } from './log/log.component';
-import { EntryListingComponent } from './entry-listing/entry-listing.component';
-import { EntryPageComponent } from './entry-page/entry-page.component';
-import { LogsService } from './shared/services/logs.service';
+import { OpportunityComponent } from './opportunity/opportunity.component';
+import { CuriosityComponent } from './curiosity/curiosity.component';
+import { SpiritComponent } from './spirit/spirit.component';
+import { RoverImageComponent } from './rover-image/rover-image.component';
+
 import { RoverImagesService } from './shared/services/rover-images.service';
 
-import { CategoriesService } from './shared/services/categories.service';
 
 
 const defaultTitle = 'mars app rover';
 
 
 const ROUTES = [
-  { path: '', redirectTo: 'work', pathMatch: 'full', data: { pageTitle: defaultTitle, pageHeader: ''} },
-  { path: 'about', component: AboutComponent, data: { pageTitle: defaultTitle + ' : about', pageHeader: 'about'} },
-  { path: 'log', component: LogComponent, data: { pageTitle: defaultTitle + ' : log', pageHeader: 'log'} }
+  { path: '', redirectTo: 'opportunity', pathMatch: 'full', data: { pageTitle: defaultTitle, pageHeader: ''} },
+  { path: 'opportunity', component: OpportunityComponent, data: { pageTitle: defaultTitle + ' : about', pageHeader: 'opportunity'} },
+  { path: 'curiosity', component: CuriosityComponent, data: { pageTitle: defaultTitle + ' : curiosity', pageHeader: 'log'} },
+  { path: 'spirit', component: SpiritComponent, data: { pageTitle: defaultTitle + ' : spirit', pageHeader: 'log'} }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    AboutComponent,
-    LogComponent,
-    EntryListingComponent,
-    EntryPageComponent
+    CuriosityComponent,
+    OpportunityComponent,
+    SpiritComponent,
+    RoverImageComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'mars-rover-app'}),
@@ -43,7 +43,7 @@ const ROUTES = [
     HttpClientModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [LogsService, CategoriesService],
+  providers: [RoverImagesService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

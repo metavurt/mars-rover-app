@@ -4,15 +4,15 @@ import { MockBackend } from '@angular/http/testing';
 
 import { LogsService } from '../shared/services/logs.service';
 
-import { LogComponent } from './log.component';
+import { CuriosityComponent } from './curiosity.component';
 
-describe('LogComponent', () => {
-  let component: LogComponent;
-  let fixture: ComponentFixture<LogComponent>;
+describe('CuriosityComponent', () => {
+  let component: CuriosityComponent;
+  let fixture: ComponentFixture<CuriosityComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LogComponent ],
+      declarations: [ CuriosityComponent ],
       providers: [
         LogsService
       ]
@@ -21,7 +21,7 @@ describe('LogComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LogComponent);
+    fixture = TestBed.createComponent(CuriosityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
