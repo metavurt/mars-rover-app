@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
@@ -11,10 +12,9 @@ import { OpportunityComponent } from './opportunity/opportunity.component';
 import { CuriosityComponent } from './curiosity/curiosity.component';
 import { SpiritComponent } from './spirit/spirit.component';
 import { RoverImageComponent } from './rover-image/rover-image.component';
-
 import { RoverImagesService } from './shared/services/rover-images.service';
 
-
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 const defaultTitle = 'mars app rover';
 
@@ -39,6 +39,9 @@ const ROUTES = [
     FormsModule,
     MatIconModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
     HttpModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES)

@@ -24,10 +24,10 @@ export class RoverImagesService {
   }
 
   getImagesBySol(rover: string, sol: number) {
-    return this.http.get<RoverImage>(baseAPI + rover + 'photos?sol=' + sol + '&api_key=' + baseKey);
+    return this.http.get<RoverBatch>(baseAPI + rover + '/photos?sol=' + sol + '&api_key=' + baseKey);
   }
 
   getImagesByEarthDate(rover: string, edate: string) {
-    return this.http.get<RoverImage>(baseAPI + rover + 'photos?edate=' + edate + '&api_key=' + baseKey);
+    return this.http.get<RoverBatch>(baseAPI + rover + '/photos?earth_date=' + edate + '&api_key=' + baseKey);
   }
 }

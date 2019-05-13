@@ -23,11 +23,9 @@
     "@angular/platform-browser-dynamic": "^7.2.1",
     "@angular/platform-server": "^7.2.1",
     "@angular/router": "^7.2.1",
-    "@fullcalendar/angular": "^4.1.0",
-    "@fullcalendar/core": "^4.1.0",
-    "@fullcalendar/daygrid": "^4.1.0",
     "@nguniversal/module-map-ngfactory-loader": "^7.1.0",
     "core-js": "^3.0.1",
+    "ng-pick-datetime": "^7.0.0",
     "ngx-scrollreveal": "^3.0.0",
     "rxjs": "^6.3.3",
     "scrollreveal": "^4.0.5"

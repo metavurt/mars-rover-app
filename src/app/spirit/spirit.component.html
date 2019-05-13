@@ -1,19 +1,46 @@
 <main>
 
-  <section class="logbook">
-    <div class="loading-layout" *ngIf="!entries">
-      <img class="loading-logo" src="../../assets/images/blocks.svg" />
-    </div>
-
-    <!-- calendar drop down -->
-
-    <!-- image goes here -->
+    <section class="logbook">
+      <div class="loading-layout" *ngIf="!imagedata">
+        <img class="loading-logo" src="../../assets/images/blocks.svg" />
+      </div>
   
-    <!-- <ul class="entries-list" *ngIf="entries">
-      <li *ngFor="let entry of entries" class="fade-in-manual">
-        <entry-listing [entry]="entry"></entry-listing>
-      </li>
-    </ul> -->
-  </section>
-
-</main>
+      <!-- calendar drop down -->
+      <p>show images by</p>
+      <div class="date-picker-wrapper">
+        <label class="date-input-wrapper">date:
+            <input placeholder="Date:"
+                   [(ngModel)]="dateTime1"
+                   [min]="minDate" [max]="maxDate"
+                   (ngModelChange)="onChangeDate($event)"
+                   [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1" #dateTime="ngModel">
+            <owl-date-time [pickerType]="'calendar'" [pickerMode]="'dialog'" #dt1></owl-date-time>
+        </label>
+        <div *ngIf="dateTime.invalid && dateTime.errors.owlDateTimeMin">
+            Date must after {{min | date: 'medium'}}
+        </div>
+        <div *ngIf="dateTime.invalid && dateTime.errors.owlDateTimeMax">
+            Date must be before {{max | date: 'medium'}}
+        </div>
+        <!-- <label class="date-input-wrapper">
+          sol:<input [(ngModel)]="solDate">
+        </label> -->
+      </div>
+  
+      <h4>Sol: {{this.currSol}}<br/>Earth date: {{currEarthdate | date }}</h4>
+  
+      <div class="rover-image-grid" *ngIf="imagedata?.length > 0">
+        <figure *ngFor="let image of imagedata">
+          <img src="{{image.img_src}}" />
+          <figcaption><span>{{image.camera.full_name}}</span></figcaption>
+        </figure>
+      </div>
+  
+      <div *ngIf="imagedata?.length == 0">
+        <p>no images for that date</p>
+      </div>
+  
+  
+    </section>
+  
+  </main>
