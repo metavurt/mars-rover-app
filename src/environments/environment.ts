@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'https://api.nasa.gov/mars-photos/api/v1/rovers/',
-  apiKey: 'YQv888J9gVeBN6TPQJqZ78ox127KhPQriWjNbYKa'
+  apiKey: 'bringyourown'
 };
 
 /*
