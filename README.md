@@ -8,9 +8,6 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli)
 
-## Notes
-Does not include needed API key
-
 ## Requirements
 
 Node >=v6.5.0 and npm >=3.10.3
